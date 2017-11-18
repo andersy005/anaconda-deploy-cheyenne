@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#HPCI -n conda
+#HPCI -v 5.0.1
+echo "Creating Build directory and Downloading Anaconda..."
+mkdir build
+cd build 
+
+# terminate this script immediately should anything go wrong
+set -e
+
+# Download Anaconda and run the executable 
+wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
+
+echo "Successfully created Build directory and downloaded Anaconda..."
+chmod +x Anaconda3-5.0.1-Linux-x86_64.sh
+./Anaconda3-5.0.1-Linux-x86_64.sh
