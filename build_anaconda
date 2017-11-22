@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #HPCI -n conda
 #HPCI -v 5.0.1
+#HPCI -a conda_logs
+
 echo "Creating Build directory and Downloading Anaconda..."
 mkdir build
 cd build 
@@ -9,8 +11,36 @@ cd build
 set -e
 
 # Download Anaconda and run the executable 
-wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
+#wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
 
 echo "Successfully created Build directory and downloaded Anaconda..."
-chmod +x Anaconda3-5.0.1-Linux-x86_64.sh
-./Anaconda3-5.0.1-Linux-x86_64.sh
+#chmod +x Anaconda3-5.0.1-Linux-x86_64.sh
+#./Anaconda3-5.0.1-Linux-x86_64.sh
+
+mkdir -p $HPCI_SW_DIR
+
+# Copy Anaconda Installation directories to the build directory
+cp -r /glade2/scratch2/abanihi/cy/test_installs/conda/anaconda3 $HPCI_SW_DIR
+
+# Create the module directory, if needed
+mkdir -p $HPCI_MOD_DIR_CDEP/$HPCI_SW_NAME/
+
+# Create the module with the following template
+cat << EOF > $HPCI_MOD_DIR_CDEP/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
+require("posix")
+
+whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
+
+help([[
+This module loads conda.
+See https://conda.io/docs/index.html/ for details.
+]])
+
+local verpath = "$HPCI_SW_DIR/anaconda3"                    -- specific version path
+local binpath = pathJoin(verpath, "bin")                    -- internal python libs
+-- similarly for includes or others
+
+prepend_path("PATH", binpath)
+
+prereq($HPCI_MOD_PREREQ)
+EOF
