@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #HPCI -n conda
 #HPCI -v 5.0.1
-#HPCI -a conda_logs
 
 echo "Creating Build directory and Downloading Anaconda..."
 mkdir build
