@@ -11,7 +11,9 @@ set -e
 mkdir -p $HPCI_SW_DIR
 
 
-# Download Anaconda and run the executable 
+# Download Miniconda and run install in batch mode (without manual intervention),
+# it is expected the license terms are agreed upon and specify install prefix
+ 
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $HPCI_SW_DIR/miniconda
 
