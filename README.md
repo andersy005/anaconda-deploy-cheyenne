@@ -20,3 +20,12 @@ $ module load hpcinstall
 ```bash
 $ hpcinstall build_conda
 ```
+
+# Use
+
+To load this module:
+
+```bash
+$ ml use /glade/scratch/abanihi/ch/test_installs/modulefiles/idep/
+$ ml conda
+```
