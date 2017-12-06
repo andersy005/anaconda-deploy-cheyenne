@@ -9,6 +9,13 @@ Documented script example of Miniconda deployment on [Cheyenne Supercomputer](ht
 $ git clone git@github.com:andersy005/conda-deploy-cheyenne.git
 $ cd conda-deploy-cheyenne
 ```
+
+- Load HPCinstall module
+```bash
+$ module use $MODULEPATH_ROOT/system
+$ module load hpcinstall
+```
+
 - Install using HPCinstall
 ```bash
 $ hpcinstall build_conda
