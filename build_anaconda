@@ -1,46 +1,48 @@
 #!/usr/bin/env bash
 #HPCI -n conda
-#HPCI -v 5.0.1
+#HPCI -v 4.3.30
 #HPCI -u https://conda.io/docs/index.html/
 
-echo "Creating Build directory and Downloading Anaconda..."
-mkdir build
-cd build 
+echo "Downloading and installing Miniconda..."
 
 # terminate this script immediately should anything go wrong
 set -e
 
-# Download Anaconda and run the executable 
-#wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh
-
-echo "Successfully created Build directory and downloaded Anaconda..."
-#chmod +x Anaconda3-5.0.1-Linux-x86_64.sh
-#./Anaconda3-5.0.1-Linux-x86_64.sh
-
 mkdir -p $HPCI_SW_DIR
 
-# Copy Anaconda Installation directories to the build directory
-cp -r /glade2/scratch2/abanihi/cy/test_installs/conda/anaconda3 $HPCI_SW_DIR
+
+# Download Anaconda and run the executable 
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh -b -p $HPCI_SW_DIR/miniconda
+
+# Check for Conda installation Info
+export PATH="$HPCI_SW_DIR/miniconda/bin:$PATH"
+hash -r 
+conda config --set always_yes yes --set changeps1 no
+echo "Printing Conda Current Installation info....."
+conda info -a
+
+echo "End of Conda Current Installation info...."
 
 # Create the module directory, if needed
-mkdir -p $HPCI_MOD_DIR_CDEP/$HPCI_SW_NAME/
+mkdir -p $HPCI_MOD_DIR_IDEP/$HPCI_SW_NAME/
 
 # Create the module with the following template
-cat << EOF > $HPCI_MOD_DIR_CDEP/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
+cat << EOF > $HPCI_MOD_DIR_IDEP/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
 require("posix")
 
 whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
 
 help([[
-This module loads conda.
+This module loads conda package manager.
 See https://conda.io/docs/index.html/ for details.
 ]])
 
-local verpath = "$HPCI_SW_DIR/anaconda3"                    -- specific version path
+local verpath = "$HPCI_SW_DIR/miniconda"                    -- specific version path
 local binpath = pathJoin(verpath, "bin")                    -- internal python libs
 -- similarly for includes or others
 
 prepend_path("PATH", binpath)
-
+conflict("python")
 prereq($HPCI_MOD_PREREQ)
 EOF
