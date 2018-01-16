@@ -8,6 +8,8 @@ echo "Downloading and installing Miniconda..."
 # terminate this script immediately should anything go wrong
 set -e
 
+export HPCI_SW_DIR=/glade/p/work/abanihi/cheyenne/software
+
 mkdir -p $HPCI_SW_DIR
 
 
