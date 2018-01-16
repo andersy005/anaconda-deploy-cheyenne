@@ -8,8 +8,6 @@ echo "Downloading and installing Miniconda..."
 # terminate this script immediately should anything go wrong
 set -e
 
-export HPCI_SW_DIR=/glade/p/work/abanihi/cheyenne/software
-
 mkdir -p $HPCI_SW_DIR
 
 
@@ -29,10 +27,10 @@ conda info -a
 echo "End of Conda Current Installation info...."
 
 # Create the module directory, if needed
-mkdir -p $HPCI_MOD_DIR_IDEP/$HPCI_SW_NAME/
+mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
 
 # Create the module with the following template
-cat << EOF > $HPCI_MOD_DIR_IDEP/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
+cat << EOF > $HPCI_MOD_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
 require("posix")
 
 whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
