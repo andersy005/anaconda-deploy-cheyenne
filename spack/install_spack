@@ -30,7 +30,6 @@ See http://spack.readthedocs.io/ for more details.
 local verpath = "$INSTALL_PATH"                         -- specific version path
 local binpath = pathJoin(verpath, "bin")               
 prepend_path("PATH", binpath)
-conflict("python", "conda")
 prereq($HPCI_MOD_PREREQ)
 EOF
-echo "........spack module creation completed successfully........\n"
+echo "........spack module creation completed successfully........"
