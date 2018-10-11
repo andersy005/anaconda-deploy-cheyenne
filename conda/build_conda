@@ -41,7 +41,11 @@ whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
 
 help([[
 This module loads conda package manager.
-See hhttps://conda.io/docs/ for details.
+See https://conda.io/docs/ for more details.
+
+To create and install your own conda module, 
+check https://github.com/andersy005/modules-cheyenne out. 
+
 ]])
 
 local verpath = "$INSTALL_PATH"                    -- specific version path
@@ -55,4 +59,10 @@ EOF
 
 echo "Making conda's root environment permission to read only"
 chmod 444 $INSTALL_PATH/conda-meta/history
-echo "........conda module creation completed successfully........"
+echo "........conda module creation completed successfully........\n\n\n"
+cat ./hpci.main.log
+
+printf "\n\tTo load the conda module, you will need to run\n 
+    \tmodule use <HPCI_MOD_DIR>\n
+    \tmodule load conda\n
+      \tNOTE: Replace HPCI_MOD_DIR with the corresponding value printed above.\n"
