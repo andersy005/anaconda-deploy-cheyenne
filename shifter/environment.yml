@@ -2,6 +2,8 @@ name: shifter-dev
 channels:
   - conda-forge
   - defaults 
+  - nlesc
+  - sbu-hpc 
 dependencies:
   - python==3.6
   - six 
@@ -19,4 +21,7 @@ dependencies:
   - wget 
   - gflags 
   - cython 
-  
+  - glibc 
+  - mongodb 
+  - squashfs-tools 
+
