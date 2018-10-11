@@ -60,7 +60,7 @@ EOF
 echo "Making conda's root environment permission to read only"
 chmod 444 $INSTALL_PATH/conda-meta/history
 echo "........conda module creation completed successfully........\n\n\n"
-cat $HPCI_SW_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}/BUILD_DIR/hpci.main.log
+cat ./hpci.main.log
 
 printf "\n\tTo load the conda module, you will need to run\n 
     \tmodule use <HPCI_MOD_DIR>\n
