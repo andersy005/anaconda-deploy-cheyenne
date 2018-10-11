@@ -1,0 +1,22 @@
+name: shifter-dev
+channels:
+  - conda-forge
+  - defaults 
+dependencies:
+  - python==3.6
+  - six 
+  - setuptools 
+  - pytest 
+  - cmake 
+  - rapidjson 
+  - gcc 
+  - curl 
+  - cmake 
+  - json-c 
+  - libtool 
+  - autoconf 
+  - automake 
+  - wget 
+  - gflags 
+  - cython 
+  
