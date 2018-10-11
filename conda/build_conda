@@ -12,9 +12,7 @@ export HPCI_SW_DIR=/glade/work/abanihi/softwares
 
 # Download Miniconda and run install in batch mode (without manual intervention),
 # it is expected the license terms are agreed upon and specify install prefix
-echo "Creating installation path"
 export INSTALL_PATH=$HPCI_SW_DIR/miniconda3
-mkdir -p $INSTALL_PATH 
 echo "Installation Path is created at"
 echo $INSTALL_PATH
 
