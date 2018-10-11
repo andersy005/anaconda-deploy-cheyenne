@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#HPCI -n spack 
+#HPCI -v 0.11.2
+#HPCI -u https://spack.readthedocs.io/en/latest/
+
+echo "........spack module creation started........"
+echo "Downloading and installing spack..."
+
+# terminate this script immediately should anything go wrong
+set -e
+
+export HPCI_SW_DIR=/glade/work/abanihi/softwares
+export INSTALL_PATH=$HPCI_SW_DIR/$HPCI_SW_NAME
+git clone https://github.com/spack/spack.git $INSTALL_PATH
+
+
+# Create the module directory, if needed
+mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
+
+# Create the module with the following template
+cat << EOF > $HPCI_MOD_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
+require("posix")
+whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
+help([[
+This module loads spack: a multi-platform package manager that 
+builds and installs multiple versions and configurations of software. 
+See http://spack.readthedocs.io/ for more details.
+
+]])
+local verpath = "$INSTALL_PATH"                         -- specific version path
+local binpath = pathJoin(verpath, "bin")               
+prepend_path("PATH", binpath)
+conflict("python", "conda")
+prereq($HPCI_MOD_PREREQ)
+EOF
