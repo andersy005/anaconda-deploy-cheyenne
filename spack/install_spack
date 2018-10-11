@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 #HPCI -n spack 
 #HPCI -v 0.11.2
-#HPCI -u https://spack.readthedocs.io/en/latest/
-#HPCI -o CLOBBER           
+#HPCI -u https://spack.readthedocs.io/en/latest/          
 
 echo "........spack module creation started........"
 echo "........Downloading and installing spack....."
@@ -11,16 +10,13 @@ echo "........Downloading and installing spack....."
 set -e
 
 export HPCI_SW_DIR=/glade/work/abanihi/softwares
-git clone https://github.com/spack/spack.git 
-echo "Copying spack to installation location"
-cp -r spack $HPCI_SW_DIR
-echo "Copying successfully completed"
+export INSTALL_PATH=$HPCI_SW_DIR/$HPCI_SW_NAME
+git clone https://github.com/spack/spack.git $INSTALL_PATH
 
 # Create the module directory, if needed
 echo "Creating module directory"
 mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
 
-export INSTALL_PATH=$HPCI_SW_DIR/spack 
 # Create the module with the following template
 cat << EOF > $HPCI_MOD_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
 require("posix")
