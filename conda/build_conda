@@ -8,7 +8,7 @@ echo "Downloading and installing Miniconda..."
 # terminate this script immediately should anything go wrong
 set -e
 
-export HPCI_SW_DIR=/glade/p/work/abanihi/softwares
+export HPCI_SW_DIR=/glade/work/abanihi/softwares
 
 # Download Miniconda and run install in batch mode (without manual intervention),
 # it is expected the license terms are agreed upon and specify install prefix
