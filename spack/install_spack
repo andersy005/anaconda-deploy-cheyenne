@@ -10,13 +10,16 @@ echo "........Downloading and installing spack....."
 set -e
 
 export HPCI_SW_DIR=/glade/work/abanihi/softwares
-export INSTALL_PATH=$HPCI_SW_DIR/spack 
-git clone https://github.com/spack/spack.git $INSTALL_PATH
-
+git clone https://github.com/spack/spack.git 
+echo "Copying spack to installation location"
+cp -r spack $HPCI_SW_DIR
+echo "Copying successfully completed"
 
 # Create the module directory, if needed
+echo "Creating module directory"
 mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
 
+export INSTALL_PATH=$HPCI_SW_DIR/spack 
 # Create the module with the following template
 cat << EOF > $HPCI_MOD_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
 require("posix")
@@ -33,3 +36,4 @@ prepend_path("PATH", binpath)
 conflict("python", "conda")
 prereq($HPCI_MOD_PREREQ)
 EOF
+echo "........spack module creation completed successfully........\n"
