@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #HPCI -n conda
 #HPCI -v 4
-#HPCI -u https://conda.io/docs/index.html/
-
+#HPCI -u https://conda.io/docs/
+echo "........conda module creation started........"
 echo "Downloading and installing Miniconda..."
 
 # terminate this script immediately should anything go wrong
@@ -16,8 +16,10 @@ export HPCI_SW_DIR=/glade/p/work/abanihi/softwares
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $HPCI_SW_DIR/miniconda3
 
+echo "Finished installing miniconda"
 # Check for Conda installation Info
 export PATH="$HPCI_SW_DIR/miniconda3/bin:$PATH"
+echo $PATH 
 hash -r 
 conda config --set always_yes yes --set changeps1 no
 echo "Printing Conda Current Installation info....."
@@ -36,10 +38,10 @@ whatis("$HPCI_SW_NAME v$HPCI_SW_VERSION")
 
 help([[
 This module loads conda package manager.
-See https://conda.io/docs/index.html/ for details.
+See hhttps://conda.io/docs/ for details.
 ]])
 
-local verpath = "$HPCI_SW_DIR/miniconda"                    -- specific version path
+local verpath = "$HPCI_SW_DIR/miniconda3"                    -- specific version path
 local binpath = pathJoin(verpath, "bin")                    -- internal python libs
 -- similarly for includes or others
 
@@ -47,3 +49,5 @@ prepend_path("PATH", binpath)
 conflict("python")
 prereq($HPCI_MOD_PREREQ)
 EOF
+
+echo "........conda module creation completed successfully........"
