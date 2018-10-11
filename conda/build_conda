@@ -12,13 +12,18 @@ export HPCI_SW_DIR=/glade/p/work/abanihi/softwares
 
 # Download Miniconda and run install in batch mode (without manual intervention),
 # it is expected the license terms are agreed upon and specify install prefix
- 
+echo "Creating installation path"
+export INSTALL_PATH=$HPCI_SW_DIR/miniconda3
+mkdir -p $INSTALL_PATH 
+echo "Installation Path is created at"
+echo $INSTALL_PATH
+
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-bash miniconda.sh -b -p $HPCI_SW_DIR/miniconda3
+bash miniconda.sh -b -p $INSTALL_PATH
 
 echo "Finished installing miniconda"
 # Check for Conda installation Info
-export PATH="$HPCI_SW_DIR/miniconda3/bin:$PATH"
+export PATH="$INSTALL_PATH/bin:$PATH"
 echo $PATH 
 hash -r 
 conda config --set always_yes yes --set changeps1 no
@@ -41,7 +46,7 @@ This module loads conda package manager.
 See hhttps://conda.io/docs/ for details.
 ]])
 
-local verpath = "$HPCI_SW_DIR/miniconda3"                    -- specific version path
+local verpath = "$INSTALL_PATH"                    -- specific version path
 local binpath = pathJoin(verpath, "bin")                    -- internal python libs
 -- similarly for includes or others
 
