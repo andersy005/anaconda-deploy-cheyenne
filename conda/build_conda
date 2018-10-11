@@ -31,7 +31,7 @@ conda info -a
 echo "End of Conda Current Installation info...."
 
 # Create the module directory, if needed
-mkdir $HPCI_MOD_DIR/$HPCI_SW_NAME/
+mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
 
 # Create the module with the following template
 cat << EOF > $HPCI_MOD_DIR/$HPCI_SW_NAME/${HPCI_SW_VERSION}.lua
