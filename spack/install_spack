@@ -2,6 +2,7 @@
 #HPCI -n spack 
 #HPCI -v 0.11.2
 #HPCI -u https://spack.readthedocs.io/en/latest/
+#HPCI -o CLOBBER           
 
 echo "........spack module creation started........"
 echo "........Downloading and installing spack....."
