@@ -3,9 +3,10 @@ channels:
   - conda-forge
   - defaults 
   - nlesc
-  - sbu-hpc 
+  - sbu-hpc
+  - neok.m4700
 dependencies:
-  - python==3.6
+  - python=3.6
   - six 
   - setuptools 
   - pytest 
@@ -23,5 +24,6 @@ dependencies:
   - cython 
   - glibc 
   - mongodb 
-  - squashfs-tools 
+  - squashfs-tools
+  - libcap
 
