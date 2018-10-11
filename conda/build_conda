@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #HPCI -n conda
-#HPCI -v 4.3.30
+#HPCI -v 4
 #HPCI -u https://conda.io/docs/index.html/
 
 echo "Downloading and installing Miniconda..."
