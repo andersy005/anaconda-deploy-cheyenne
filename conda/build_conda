@@ -53,4 +53,6 @@ conflict("python")
 prereq($HPCI_MOD_PREREQ)
 EOF
 
+echo "Making conda's root environment permission to read only"
+chmod 444 $INSTALL_PATH/conda-meta/history
 echo "........conda module creation completed successfully........"
