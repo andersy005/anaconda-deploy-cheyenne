@@ -16,7 +16,7 @@ export INSTALL_PATH=$HPCI_SW_DIR/miniconda3
 echo "Installation Path is created at"
 echo $INSTALL_PATH
 
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $INSTALL_PATH
 
 echo "Finished installing miniconda"
@@ -58,7 +58,7 @@ prereq($HPCI_MOD_PREREQ)
 EOF
 
 echo "Making conda's root environment permission to read only"
-chmod 444 $INSTALL_PATH/conda-meta/history
+# chmod 444 $INSTALL_PATH/conda-meta/history
 echo "........conda module creation completed successfully........\n\n\n"
 cat ./hpci.main.log
 
