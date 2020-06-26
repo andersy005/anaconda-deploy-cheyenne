@@ -60,7 +60,9 @@ conda config --set show_channel_urls True
 # Specify the location to use when creating new environments
 # Make sure to change this to some place more permanent and with more space
 # such as your work directory i.e /glade/work/YOURUSERNAME/miniconda/envs
-conda config --add envs_dirs /glade/scratch/abanihi/miniconda3/envs
+# Replace $YOURUSERNAME with your username
+conda config --add envs_dirs /glade/work/$YOURUSERNAME/miniconda3/envs
+conda config --add pkgs_dirs /glade/work/$YOURUSERNAME/miniconda3/pkgs
 
 # Install pip any time Python is installed.
 conda config --set add_pip_as_python_dependency True
@@ -74,8 +76,7 @@ conda config --set pip_interop_enabled True
 
 # Install these packages by default when using `conda create`.
 conda config --append create_default_packages ipykernel \
-             --append create_default_packages jupyter \
-             --append create_default_packages "blas=*=openblas"  # help with the mkl vs openblas issue
+             --append create_default_packages jupyter
 ```
 
 ## View the contents of the generated config file. You should now have a `.condarc` file in your home directory
@@ -129,7 +130,7 @@ $ conda info
 ## Create a test environment
 
 ```bash
-$ conda create -n test-env -c conda-forge -c rapidsai pyton=3.7 cupy cudf cudatoolkit=10.1
+$ conda create -n test-env -c conda-forge -c rapidsai python=3.7 cupy cudf cudatoolkit=10.1
 $ conda activate test-env
 $ ipython # Launch Ipython
 ```
