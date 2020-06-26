@@ -1,14 +1,19 @@
 #!/usr/bin/env bash
-#HPCI -n conda
-#HPCI -v 4
+#HPCI -n miniconda
+#HPCI -v 3
 #HPCI -u https://conda.io/docs/
-echo "........conda module creation started........"
-echo "Downloading and installing Miniconda..."
 
 # terminate this script immediately should anything go wrong
 set -e
 
+python --version
+
+
+echo "conda module creation started..."
+echo "Downloading and installing Miniconda..."
+
 export HPCI_SW_DIR=/glade/work/abanihi/softwares
+mkdir -p $HPCI_SW_DIR
 
 # Download Miniconda and run install in batch mode (without manual intervention),
 # it is expected the license terms are agreed upon and specify install prefix
@@ -23,13 +28,14 @@ bash miniconda.sh -b -p $INSTALL_PATH
 echo "Finished installing miniconda"
 # Check for Conda installation Info
 export PATH="$INSTALL_PATH/bin:$PATH"
-echo $PATH 
-hash -r 
-conda config --set always_yes yes --set changeps1 no
-echo "Printing Conda Current Installation info....."
+echo $PATH
+hash -r
+echo "Updating conda base environment..."
+conda update --all -c conda-forge -y
+echo "Printing Conda Current Installation info..."
 conda info -a
 
-echo "End of Conda Current Installation info...."
+echo "End of Conda Current Installation info..."
 
 # Create the module directory, if needed
 mkdir -p $HPCI_MOD_DIR/$HPCI_SW_NAME/
@@ -44,8 +50,8 @@ help([[
 This module loads conda package manager.
 See https://conda.io/docs/ for more details.
 
-To create and install your own conda module, 
-check https://github.com/andersy005/modules-cheyenne out. 
+To create and install your own conda module,
+check https://github.com/andersy005/modules-cheyenne out.
 
 ]])
 
@@ -58,12 +64,12 @@ conflict("python")
 prereq($HPCI_MOD_PREREQ)
 EOF
 
-echo "Making conda's root environment permission to read only"
+# echo "Making conda's root environment permission to read only"
 # chmod 444 $INSTALL_PATH/conda-meta/history
-echo "........conda module creation completed successfully........\n\n\n"
+echo "conda module creation completed successfully...n\n\n"
 cat ./hpci.main.log
 
-printf "\n\tTo load the conda module, you will need to run\n 
+printf "\n\tTo load the miniconda module, you will need to run\n
     \tmodule use <HPCI_MOD_DIR>\n
-    \tmodule load conda\n
+    \tmodule load miniconda\n
       \tNOTE: Replace HPCI_MOD_DIR with the corresponding value printed above.\n"
