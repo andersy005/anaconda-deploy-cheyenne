@@ -18,6 +18,7 @@ No modules loaded
 $ # This is needed for the module loading to work
 $ module use /glade/work/abanihi/softwares/modulefiles
 $ module load miniconda
+$ module save
 
 $ ml
 
@@ -52,8 +53,8 @@ After running `conda init`, log out and log in again.
 See [conda config](https://docs.conda.io/projects/conda/en/latest/commands/config.html) for more info.
 
 ```bash
-# Add conda-forge, pytorch, and rapidsai channels
-conda config --add channels rapidsai --add channels pytorch --add channels conda-forge
+# Add conda-forge channels
+conda config --add channels conda-forge
 conda config --set channel_priority flexible
 conda config --set show_channel_urls True
 
@@ -86,18 +87,11 @@ $ cat ~/.condarc
 add_pip_as_python_dependency: true
 channels:
   - conda-forge
-  - pytorch
-  - rapidsai
   - defaults
 channel_priority: flexible
-envs_dirs:
-  - /glade/scratch/abanihi/miniconda3/envs
 show_channel_urls: true
 pip_interop_enabled: true
-create_default_packages:
-  - ipykernel
-  - jupyter
-  - blas=*=openblas
+...
 ```
 
 ## Check the location of the user's conda installation:
@@ -130,7 +124,7 @@ $ conda info
 ## Create a test environment
 
 ```bash
-$ conda create -n test-env -c conda-forge -c rapidsai python=3.7 cupy cudf cudatoolkit=10.1
+$ conda create -n test-env -c conda-forge python=3.8 xarray netcdf4
 $ conda activate test-env
 $ ipython # Launch Ipython
 ```
@@ -138,7 +132,7 @@ $ ipython # Launch Ipython
 Confirm the environment was properly created:
 
 ```python
-In [1]: import numpy as np
+In [1]: import xarray as xr
 
 In [2]: import sys
 
